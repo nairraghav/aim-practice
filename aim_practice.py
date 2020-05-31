@@ -42,27 +42,35 @@ class Circle:
 
 
 def get_statistics_text(score, attempts, screen_width, screen_height):
-    font = pygame.font.Font('freesansbold.ttf', 32)
+    font = pygame.font.Font("freesansbold.ttf", 32)
     green = (0, 255, 0)
     blue = (0, 0, 128)
     texts_and_boxes = []
 
-    score_text = font.render(f'Score: {score}', True, green, blue)
+    score_text = font.render(f"Score: {score}", True, green, blue)
     score_text_rectangle = score_text.get_rect()
     score_text_rectangle.center = (screen_width // 2, screen_height // 2)
     texts_and_boxes.append((score_text, score_text_rectangle))
 
     if attempts > 0:
-        accuracy_text = font.render(f'Accuracy: {round(100*score/attempts, 2)}%', True, green, blue)
+        accuracy_text = font.render(
+            f"Accuracy: {round(100*score/attempts, 2)}%", True, green, blue
+        )
     else:
-        accuracy_text = font.render('Accuracy: 0%', True, green, blue)
+        accuracy_text = font.render("Accuracy: 0%", True, green, blue)
     accuracy_text_rectangle = accuracy_text.get_rect()
-    accuracy_text_rectangle.center = (screen_width // 2, screen_height // 2 + score_text_rectangle.height)
+    accuracy_text_rectangle.center = (
+        screen_width // 2,
+        screen_height // 2 + score_text_rectangle.height,
+    )
     texts_and_boxes.append((accuracy_text, accuracy_text_rectangle))
 
-    play_again_text = font.render('Play Again?', True, green, blue)
+    play_again_text = font.render("Play Again?", True, green, blue)
     play_again_text_rectangle = play_again_text.get_rect()
-    accuracy_text_rectangle.center = (screen_width // 2, screen_height // 2 + accuracy_text_rectangle.height)
+    accuracy_text_rectangle.center = (
+        screen_width // 2,
+        screen_height // 2 + accuracy_text_rectangle.height,
+    )
     texts_and_boxes.append((play_again_text, play_again_text_rectangle))
 
     return texts_and_boxes
@@ -90,13 +98,17 @@ if __name__ == "__main__":
 
                 screen.fill(black)
 
-                circle = Circle(screen_width=width, screen_height=height, window=screen)
+                circle = Circle(
+                    screen_width=width, screen_height=height, window=screen
+                )
 
                 pygame.display.update()
 
                 clock = pygame.time.Clock()
                 waiting = True
-                max_wait_time = 2000  # 2 seconds -- change this if you want to increase/decrease difficulty
+                # 2 seconds
+                # change this if you want to increase/decrease difficulty
+                max_wait_time = 2000
                 start_time = pygame.time.get_ticks()
 
                 while waiting:
@@ -126,16 +138,19 @@ if __name__ == "__main__":
 
             start_game = False
 
-        text_and_boxes = get_statistics_text(score=score, attempts=attempts, screen_width=width, screen_height=height)
+        text_and_boxes = get_statistics_text(
+            score=score,
+            attempts=attempts,
+            screen_width=width,
+            screen_height=height,
+        )
         screen.fill(black)
         for text, text_box in text_and_boxes:
             screen.blit(text, text_box)
         pygame.display.update()
 
         for event in pygame.event.get():
-            if (event.type == pygame.MOUSEBUTTONDOWN) and (
-                    event.button == 1
-            ):
+            if (event.type == pygame.MOUSEBUTTONDOWN) and (event.button == 1):
                 mouse_coordinates = pygame.mouse.get_pos()
 
                 if text_and_boxes[-1][1].collidepoint(mouse_coordinates):
