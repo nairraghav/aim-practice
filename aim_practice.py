@@ -3,6 +3,10 @@ import random
 from math import sqrt
 
 
+TARGETS_PER_GAME = 5
+TIME_BETWEEN_TARGETS = 2000  # milliseconds
+
+
 class Circle:
     def __init__(self, screen_width, screen_height, window, circle_radius=30):
         self.screen_width = screen_width
@@ -95,6 +99,8 @@ if __name__ == "__main__":
     black = 0, 0, 0
 
     screen = pygame.display.set_mode(size)
+    ding_sound = pygame.mixer.Sound('sounds/ding.ogg')
+    whoosh_sound = pygame.mixer.Sound('sounds/whoosh.ogg')
 
     start_game = True
     end_game = False
@@ -108,7 +114,7 @@ if __name__ == "__main__":
             score = 0
             attempts = 0
             times = []
-            for _ in range(5):
+            for _ in range(TARGETS_PER_GAME):
                 screen.fill(black)
 
                 circle = Circle(
@@ -121,12 +127,13 @@ if __name__ == "__main__":
                 waiting = True
                 # 2 seconds
                 # change this if you want to increase/decrease difficulty
-                max_wait_time = 2000
+                max_wait_time = TIME_BETWEEN_TARGETS
                 start_time = pygame.time.get_ticks()
 
                 while waiting:
                     current_time = pygame.time.get_ticks()
                     if current_time - start_time >= max_wait_time:
+                        whoosh_sound.play(0)
                         waiting = False
                         break
 
@@ -138,6 +145,7 @@ if __name__ == "__main__":
                             mouse_coordinates = pygame.mouse.get_pos()
 
                             if circle.is_clicked(mouse_coordinates):
+                                ding_sound.play(0)
                                 score += 1
                                 times.append(current_time - start_time)
                                 waiting = False
