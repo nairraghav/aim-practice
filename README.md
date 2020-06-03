@@ -2,11 +2,11 @@
 An aiming game created with the pygame python library
 
 ## Game Rules
-When the game is run, you are immediately thrown into a game where targets are randomly generated within the game screen.
-The goal is to click on the targets. When you click on a target, you will be awarded a point and the target should
-re-generate somewhere else. If you do not click on the target before the target disappears on its own, it will disappear
-and re-generate in a new location. You should be able to tell if the game received the click via a ding sound cue. 
-Similarly, if time has passed for a target, you will hear a whoosh sound. 
+When the game is run, you are loaded at a start screen where you need to start the game with clicking a button. The goal
+is to click on the targets. When you click on a target, you will be awarded a point and the target should re-generate
+somewhere else. If you do not click on the target before the target disappears on its own, it will disappear and
+re-generate in a new location. You should be able to tell if the game received the click via a ding sound cue. Similarly,
+if time has passed for a target, you will hear a whoosh sound. 
 
 A game has concluded once all the targets have shown up and been clicked or missed. The end of the game will generate
 a small statistics board with a chance to replay.
