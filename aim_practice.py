@@ -53,36 +53,50 @@ def get_statistics_text(score, attempts, times, screen_width, screen_height):
 
     score_text = font.render(f"Score: {score}", True, green, blue)
     score_text_rectangle = score_text.get_rect()
-    score_text_rectangle.center = (screen_width // 2, screen_height // 2 + len(texts_and_boxes) * score_text_rectangle.height)
+    score_text_rectangle.center = (
+        screen_width // 2,
+        screen_height // 2
+        + len(texts_and_boxes) * score_text_rectangle.height,
+    )
     texts_and_boxes.append((score_text, score_text_rectangle))
 
     if len(times) > 0:
         if attempts > 0:
             accuracy_text = font.render(
-                f"Accuracy: {round(100 * score / attempts, 2)}%", True, green, blue
+                f"Accuracy: {round(100 * score / attempts, 2)}%",
+                True,
+                green,
+                blue,
             )
         else:
             accuracy_text = font.render("Accuracy: 0%", True, green, blue)
         accuracy_text_rectangle = accuracy_text.get_rect()
         accuracy_text_rectangle.center = (
             screen_width // 2,
-            screen_height // 2 + len(texts_and_boxes) * score_text_rectangle.height,
+            screen_height // 2
+            + len(texts_and_boxes) * score_text_rectangle.height,
         )
         texts_and_boxes.append((accuracy_text, accuracy_text_rectangle))
 
-        average_text = font.render(f"Average Time: {sum(times) / len(times)}ms", True, green, blue)
+        average_text = font.render(
+            f"Average Time: {sum(times) / len(times)}ms", True, green, blue
+        )
         average_text_rectangle = average_text.get_rect()
         average_text_rectangle.center = (
             screen_width // 2,
-            screen_height // 2 + len(texts_and_boxes) * score_text_rectangle.height,
+            screen_height // 2
+            + len(texts_and_boxes) * score_text_rectangle.height,
         )
         texts_and_boxes.append((average_text, average_text_rectangle))
 
-        fastest_text = font.render(f"Fastest Time: {round(min(times), 2)}ms", True, green, blue)
+        fastest_text = font.render(
+            f"Fastest Time: {round(min(times), 2)}ms", True, green, blue
+        )
         fastest_text_rectangle = fastest_text.get_rect()
         fastest_text_rectangle.center = (
             screen_width // 2,
-            screen_height // 2 + len(texts_and_boxes) * score_text_rectangle.height,
+            screen_height // 2
+            + len(texts_and_boxes) * score_text_rectangle.height,
         )
         texts_and_boxes.append((fastest_text, fastest_text_rectangle))
 
@@ -92,7 +106,10 @@ def get_statistics_text(score, attempts, times, screen_width, screen_height):
     else:
         play_again_text = font.render("Play Game", True, green, blue)
         play_again_text_rectangle = play_again_text.get_rect()
-        play_again_text_rectangle.center = (screen_width // 2, screen_height // 2)
+        play_again_text_rectangle.center = (
+            screen_width // 2,
+            screen_height // 2,
+        )
         texts_and_boxes.append((play_again_text, play_again_text_rectangle))
 
     return texts_and_boxes
@@ -104,8 +121,8 @@ if __name__ == "__main__":
     black = 0, 0, 0
 
     screen = pygame.display.set_mode(size)
-    ding_sound = pygame.mixer.Sound('sounds/ding.ogg')
-    whoosh_sound = pygame.mixer.Sound('sounds/whoosh.ogg')
+    ding_sound = pygame.mixer.Sound("sounds/ding.ogg")
+    whoosh_sound = pygame.mixer.Sound("sounds/whoosh.ogg")
 
     start_game = False
     end_game = False
